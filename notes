@@ -1,0 +1,9 @@
+SERVER:
+- el servidor debe lanzarse PRIMERO y mostrar su PID
+- mostrar la string rapidamente
+
+CLIENT:
+- el cliente toma como parametros:
+	- el PID del servidor
+	- la string a enviar.
+
