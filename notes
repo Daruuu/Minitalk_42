@@ -7,3 +7,5 @@ CLIENT:
 	- el PID del servidor
 	- la string a enviar.
 
+signal :
+	
