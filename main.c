@@ -6,7 +6,7 @@
 /*   By: dasalaza <dasalaza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 20:23:58 by dasalaza          #+#    #+#             */
-/*   Updated: 2024/01/13 20:14:43 by dasalaza         ###   ########.fr       */
+/*   Updated: 2024/04/03 21:35:49 by dasalaza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	main(void)
  * indica en pantalla que no se quiere salir y pone el controlador por defecto
  * para Ctrl-C
 */
+
+/*
 void	controlador(int numberSignal)
 {
 	ft_printf("no se sale\n");
@@ -38,6 +40,7 @@ void	controlador(int numberSignal)
 	// se pone controlador por default
 	signal(SIGINT, SIG_DFL);
 }
+*/
 
 /*
 int	main()
