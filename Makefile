@@ -1,32 +1,61 @@
-SERVER = 
-CLIENT =
 
-CC = 		cc 
-CFLAGS = 	-Wall -Wextra -Werror
+SERVER		=	ft_server.c
+CLIENT		=	ft_client.c
 
-RM = 		rm -f
+PRINTF		=	make -C include/printf/
+LIB_PRINTF	=	include/printf/libftprintf.a
+CLEAN_LIB	=	make -C include/printf/ fclean
 
-HEADER = 	minitalk.h
+# ---------------sources and objects----------------------
 
-SRCS = 
+SERVER_SRC	=	$(SERVER)
+SERVER_OBJS	=	$(SERVER_SRC:.c=.o)
 
+CLIENT_SRC	=	$(CLIENT)
+CLIENT_OBJS	=	$(CLIENT_SRC:.c=.o)
 
+OBJS		=	$(SERVER_OBJS) $(CLIENT_OBJS)
 
-OBJS = 		$(SRCS:.c=.o)
+# ----------------- Constants strings ---------------------
 
-%.o:%.c = 	$(HEADER) Makefile
-			$(CC CFLAGS) -c $< -o $@
+CC			=	cc 
+CFLAGS		=	-Wall -Wextra -Werror
 
-all = 		$(NAME)
+RM			=	rm -f
+HEADER		=	minitalk.h
 
-$(NAME):	$(OBJS)
+SERVER_NAME	=	server
+CLIENT_NAME	=	client
 
-clean:
-			$(RM) $(OBJS)
+NAME 		= 	server
 
-fclean:		clean
-			$(RM) $(NAME)
+# -------------------------RULES----------------------------
 
-re:			fclean all
+$(NAME):	ft_server ft_client
 
-.PHONY:		all clean fclean re
+%.o: %.c $(HEADER) Makefile
+	$(CC) $(CFLAGS) -c $< -o $@
+
+all:	$(NAME)
+
+start_include:
+	@$(PRINTF)
+
+ft_server:	$(SERVER_OBJS)
+	@$(CC) $(CFLAGS) $(SERVER_OBJS) $(LIB_PRINTF) -o $(SERVER_NAME)
+
+ft_client:	$(CLIENT_OBJS)
+	@$(CC) $(CFLAGS) $(CLIENT_OBJS) $(LIB_PRINTF) -o $(CLIENT_NAME)
+
+clean:		
+	$(RM) $(OBJS)
+	$(CLEAN_LIB)
+
+fclean:	clean
+	$(RM) $(NAME)
+	$(CLEAN_LIB)
+	$(RM) *.h.gch
+
+re:	fclean all
+
+.PHONY:	all clean fclean re start_include

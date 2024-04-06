@@ -1,4 +1,3 @@
-
 CC =		cc
 CFLAGS =	-Wall -Wextra -Werror
 
@@ -30,6 +29,7 @@ clean:
 
 fclean:		clean
 			$(RM) $(NAME)
+			$(RM) *.h.gch
 
 re:			fclean all
 
