@@ -6,7 +6,7 @@
 /*   By: dasalaza <dasalaza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:09:34 by dasalaza          #+#    #+#             */
-/*   Updated: 2024/04/06 14:09:54 by dasalaza         ###   ########.fr       */
+/*   Updated: 2024/04/06 15:34:29 by dasalaza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ char	*client(pid_t pidServer, char *strToSend)
 
 int	main(int argc, char **argv)
 {
-	if (argc != 2)
+	if (argc != 3)
 	{
 		ft_printf("incorrect arguments");
 	}
 	else
 	{
-		client(argv[1][1], argv[2]);
+		//client(argv[1][1], argv[2]);
 
 		printf("%s\n", argv[1]);
 		printf("%s\n", argv[2]);

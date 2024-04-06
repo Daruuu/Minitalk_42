@@ -2,16 +2,16 @@
 SERVER		=	ft_server.c
 CLIENT		=	ft_client.c
 
-PRINTF		=	make -C include/printf/
+PRINTF		=	make -C include/printf/ make
 LIB_PRINTF	=	include/printf/libftprintf.a
 CLEAN_LIB	=	make -C include/printf/ fclean
 
 # ---------------sources and objects----------------------
 
 SERVER_SRC	=	$(SERVER)
-SERVER_OBJS	=	$(SERVER_SRC:.c=.o)
-
 CLIENT_SRC	=	$(CLIENT)
+
+SERVER_OBJS	=	$(SERVER_SRC:.c=.o)
 CLIENT_OBJS	=	$(CLIENT_SRC:.c=.o)
 
 OBJS		=	$(SERVER_OBJS) $(CLIENT_OBJS)
@@ -36,16 +36,17 @@ $(NAME):	ft_server ft_client
 %.o: %.c $(HEADER) Makefile
 	$(CC) $(CFLAGS) -c $< -o $@
 
-all:	$(NAME)
+all: $(NAME) start_include 
 
 start_include:
 	@$(PRINTF)
+	@$(LIB_PRINTF)
 
 ft_server:	$(SERVER_OBJS)
-	@$(CC) $(CFLAGS) $(SERVER_OBJS) $(LIB_PRINTF) -o $(SERVER_NAME)
+	$(CC) $(CFLAGS) $(SERVER_OBJS) $(LIB_PRINTF) -o $(SERVER_NAME)
 
 ft_client:	$(CLIENT_OBJS)
-	@$(CC) $(CFLAGS) $(CLIENT_OBJS) $(LIB_PRINTF) -o $(CLIENT_NAME)
+	$(CC) $(CFLAGS) $(CLIENT_OBJS) $(LIB_PRINTF) -o $(CLIENT_NAME)
 
 clean:		
 	$(RM) $(OBJS)
@@ -54,7 +55,6 @@ clean:
 fclean:	clean
 	$(RM) $(NAME)
 	$(CLEAN_LIB)
-	$(RM) *.h.gch
 
 re:	fclean all
 
