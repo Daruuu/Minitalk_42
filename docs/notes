@@ -1,0 +1,42 @@
+
+SERVER:
+- el servidor debe lanzarse PRIMERO y mostrar su PID
+- mostrar la string rapidamente
+
+CLIENT:
+- el cliente toma como parametros:
+	- el PID del servidor
+	- la string a enviar.
+
+signal :
+	
+links
+https://github.com/Ysoroko/minitalk
+
+https://medium.com/@oduwoledare/42-minitalk-explained-5b236adc2c24
+
+https://old.chuidiang.org/clinux/senhales/senhales.php#conceptos
+
+# Documentation
+¿Qué es una señal?
+
+Una señal es un mensaje de notificación estandarizado que se utiliza en 
+sistemas operativos compatibles con POSIX o similares a Unix. 
+
+Se envía a un programa que se ejecuta de forma asíncrona para
+notificarle la ocurrencia de un evento.
+
+A continuación, el sistema interrumpe la ejecución normal del proceso en
+cuestión para desencadenar una reacción específica como, entre otras cosas, 
+la finalización del proceso.
+
+Una señal es una forma limitada de comunicación entre procesos.
+
+
+signals en C:
+https://www.codequoi.com/envoyer-et-intercepter-un-signal-en-c/
+
+
+
+
+
