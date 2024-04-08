@@ -1,28 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signal_example.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dasalaza <dasalaza@student.42barcelona.c>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/08 21:41:54 by dasalaza          #+#    #+#             */
+/*   Updated: 2024/04/08 22:02:00 by dasalaza         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <signal.h>
 #include <unistd.h>
 
-
-/**
-funcion manejadora de la senyal
-*/
-void	handle_sigint(int sig)
-{
-	printf("Capturada SIGINT (%d)\n", sig);
-
-	signal(SIGINT, SIG_DFL);
+void handle_sigint(int signum) {
+    printf("Tratamiento SIGINT");
 }
 
-int	main()
-{
-	// establecemos la funcion HANDLE_SIGINT como manejador de SIGINT
-	signal(SIGINT, handle_sigint);
+int main() {
+    // Obtener el PID del proceso actual
+    pid_t pid = getpid();
 
-	// un loop infinito para mantener el programa en ejecucion
-	while (1)
-	{
-		printf("esperando la senyal de SIGINT. Presiona Ctrl+C para enviarla.\n");
-		sleep(1);	// sleep para reducir el uso de la CPU
-	}
-	return (0);
+    // Imprimir el PID
+    printf("El PID de este proceso es: %d\n", pid);
+    signal(SIGINT, handle_sigint);
+    while (1) {
+
+    }
+    return 0;
 }

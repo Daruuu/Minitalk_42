@@ -6,11 +6,21 @@
 /*   By: dasalaza <dasalaza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:09:43 by dasalaza          #+#    #+#             */
-/*   Updated: 2024/04/06 11:57:46 by dasalaza         ###   ########.fr       */
+/*   Updated: 2024/04/08 22:55:14 by dasalaza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+static char character = '0';
+static int bitpos = 7;
+
+void    handle_sigusr1(int signum) {
+
+}
+
+void    handle_sigusr2(int signum) {
+
+}
 
 void	server()
 {
@@ -29,7 +39,9 @@ void	server()
 
 int	main()
 {
+    // Configuracion del tratamiento de las señales SIGUSR1 y SIGUSR2.
+    signal(SIGUSR1, handle_sigusr1);
+    signal(SIGUSR2, handle_sigusr2);
 	server();
-
 	return (0);
 }
