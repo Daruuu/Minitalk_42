@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dasalaza <dasalaza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/10 18:15:57 by dasalaza          #+#    #+#             */
-/*   Updated: 2024/04/08 13:55:11 by dasalaza         ###   ########.fr       */
+/*   Created: 2023/09/09 03:10:11 by dasalaza          #+#    #+#             */
+/*   Updated: 2023/09/10 03:36:58 by dasalaza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <signal.h>
-#include <unistd.h>
-#include "include/printf/ft_printf.h"
-#include "include/libft/libft.h"
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	char	*c_dst;
+	char	*c_src;
 
-void	server();
-char	*client(pid_t pidServer, char *strToSend);
-
-#endif
+	c_dst = (char *)dst;
+	c_src = (char *)src;
+	if (!dst && !src)
+		return (NULL);
+	if (c_dst > c_src)
+	{
+		while (len--)
+			c_dst[len] = c_src[len];
+	}
+	else if (c_dst < c_src)
+	{
+		while (len--)
+			*c_dst++ = *c_src++;
+	}
+	return (dst);
+}

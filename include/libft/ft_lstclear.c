@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dasalaza <dasalaza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/10 18:15:57 by dasalaza          #+#    #+#             */
-/*   Updated: 2024/04/08 13:55:11 by dasalaza         ###   ########.fr       */
+/*   Created: 2024/04/04 17:50:29 by dasalaza          #+#    #+#             */
+/*   Updated: 2024/04/05 22:34:57 by dasalaza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <signal.h>
-#include <unistd.h>
-#include "include/printf/ft_printf.h"
-#include "include/libft/libft.h"
+void	ft_lstclear(t_list **lst, void (*del)(void *))
+{
+	t_list	*tmp_node;
 
-void	server();
-char	*client(pid_t pidServer, char *strToSend);
-
-#endif
+	if (!lst || !del)
+		return ;
+	while (*lst)
+	{
+		tmp_node = (*lst)->next;
+		ft_lstdelone(*lst, del);
+        *lst = tmp_node;
+	}
+    *lst = NULL;
+}

@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dasalaza <dasalaza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/10 18:15:57 by dasalaza          #+#    #+#             */
-/*   Updated: 2024/04/08 13:55:11 by dasalaza         ###   ########.fr       */
+/*   Created: 2023/09/11 15:56:14 by dasalaza          #+#    #+#             */
+/*   Updated: 2023/09/11 18:49:00 by dasalaza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+int	ft_atoi(const char *str)
+{
+	unsigned int	i;
+	int				signo;
+	int				result;
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <signal.h>
-#include <unistd.h>
-#include "include/printf/ft_printf.h"
-#include "include/libft/libft.h"
-
-void	server();
-char	*client(pid_t pidServer, char *strToSend);
-
-#endif
+	i = 0;
+	signo = 1;
+	result = 0;
+	while (str[i] && (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13)))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			signo = -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		result = (result * 10) + (str[i] - '0');
+		i++;
+	}
+	return (signo * result);
+}

@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dasalaza <dasalaza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/10 18:15:57 by dasalaza          #+#    #+#             */
-/*   Updated: 2024/04/08 13:55:11 by dasalaza         ###   ########.fr       */
+/*   Created: 2023/09/09 01:01:34 by dasalaza          #+#    #+#             */
+/*   Updated: 2023/09/10 04:02:24 by dasalaza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <signal.h>
-#include <unistd.h>
-#include "include/printf/ft_printf.h"
-#include "include/libft/libft.h"
+void	*ft_memcpy(void *dst, const void *src, size_t n)
+{
+	size_t	i;
+	char	*ch_dst;
+	char	*ch_src;
 
-void	server();
-char	*client(pid_t pidServer, char *strToSend);
-
-#endif
+	ch_dst = (char *) dst;
+	ch_src = (char *) src;
+	if (!dst && !src)
+		return (0);
+	i = 0;
+	while (i < n)
+	{
+		ch_dst[i] = ch_src[i];
+		i++;
+	}
+	return ((void *)ch_dst);
+}

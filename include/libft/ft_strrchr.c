@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dasalaza <dasalaza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/10 18:15:57 by dasalaza          #+#    #+#             */
-/*   Updated: 2024/04/08 13:55:11 by dasalaza         ###   ########.fr       */
+/*   Created: 2023/09/07 19:47:13 by dasalaza          #+#    #+#             */
+/*   Updated: 2023/09/10 00:34:35 by dasalaza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <signal.h>
-#include <unistd.h>
-#include "include/printf/ft_printf.h"
-#include "include/libft/libft.h"
+/*devuelve un puntero a la última ocurrencia del carácter c en la cadena s.
+	o NULL si el carácter no se ha encontrado*/
 
-void	server();
-char	*client(pid_t pidServer, char *strToSend);
+char	*ft_strrchr(const char *s, int c)
+{
+	char	find_c;
+	int		len_s;
 
-#endif
+	find_c = c;
+	len_s = ft_strlen(s);
+	while (len_s >= 0)
+	{
+		if (s[len_s] == find_c)
+			return ((char *)&s[len_s]);
+		len_s--;
+	}
+	return (NULL);
+}

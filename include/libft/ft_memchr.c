@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dasalaza <dasalaza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/10 18:15:57 by dasalaza          #+#    #+#             */
-/*   Updated: 2024/04/08 13:55:11 by dasalaza         ###   ########.fr       */
+/*   Created: 2023/09/09 19:03:57 by dasalaza          #+#    #+#             */
+/*   Updated: 2023/09/10 05:00:00 by dasalaza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <signal.h>
-#include <unistd.h>
-#include "include/printf/ft_printf.h"
-#include "include/libft/libft.h"
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	unsigned char	*uc_s;
+	unsigned char	c_tofind;
+	size_t			i;
 
-void	server();
-char	*client(pid_t pidServer, char *strToSend);
-
-#endif
+	uc_s = (unsigned char *) s;
+	c_tofind = (unsigned char) c;
+	i = 0;
+	while (i < n)
+	{
+		if (uc_s[i] == c_tofind)
+			return ((void *)&uc_s[i]);
+		i++;
+	}
+	return (NULL);
+}
