@@ -6,7 +6,7 @@
 /*   By: dasalaza <dasalaza@student.42barcelona.c>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 21:41:54 by dasalaza          #+#    #+#             */
-/*   Updated: 2024/04/08 22:02:00 by dasalaza         ###   ########.fr       */
+/*   Updated: 2024/04/09 10:45:49 by dasalaza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <unistd.h>
 
 void handle_sigint(int signum) {
-    printf("Tratamiento SIGINT");
+    printf("Tratamiento SIGINT: %d\n", signum);
 }
 
 int main() {
