@@ -6,7 +6,7 @@
 /*   By: dasalaza <dasalaza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:09:43 by dasalaza          #+#    #+#             */
-/*   Updated: 2024/04/08 22:55:14 by dasalaza         ###   ########.fr       */
+/*   Updated: 2024/04/25 09:56:38 by dasalaza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 static char character = '0';
 static int bitpos = 7;
 
-void    handle_sigusr1(int signum) {
+void	handle_sigusr1(int signum)
+{
+	static int	bit;
 
 }
 
-void    handle_sigusr2(int signum) {
+void	handle_sigusr2(int signum)
+{
 
 }
 

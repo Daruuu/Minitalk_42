@@ -6,7 +6,7 @@
 /*   By: dasalaza <dasalaza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:09:34 by dasalaza          #+#    #+#             */
-/*   Updated: 2024/04/13 20:33:22 by dasalaza         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:51:01 by dasalaza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	check_correct_args(int argc, char **argv)
 	}
 	else
 	{
-		//call client function
+		//call client function HERE
         pid = (pid_t) ft_atoi(argv[1]);
 		str = argv[2][0];
 		//call function of create malloc funct y length
@@ -57,12 +57,19 @@ void	send_char(pid_t pid, char c) {
 	}
 }
 
-void	checkMessageClientValid(char *str)
+// RETURN 
+// len total = OK 
+// -1 = ERROR
+int	checkMessageLengthClient(char *str)
 {
 	int		length_message;
-	char	*cleanMessage;
 
+	length_message = -1;
 	length_message = ft_strlen(str);
+	//if (length_message > 0 && length_message < 2147483647)
+	if (length_message > 0)
+		return (length_message);
+	return (-1);
 }
 
 char	*client(pid_t pidServer, char *strToSend)
@@ -84,6 +91,13 @@ char	*client(pid_t pidServer, char *strToSend)
 
 int	main (int argc, char **argv)
 {
+	int	lengthClient;
     check_correct_args(argc, argv);
+	lengthClient = checkMessageLengthClient(&argv[2][0]);
+	if (lengthClient < 0)
+		ft_printf("Longitud erronea!");
+	else
+		// SEND STRING TO SERVER VIA SIGUSER1-2 
+
 	return (0);
 }
