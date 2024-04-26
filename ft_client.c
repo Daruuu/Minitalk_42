@@ -6,7 +6,7 @@
 /*   By: dasalaza <dasalaza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:09:34 by dasalaza          #+#    #+#             */
-/*   Updated: 2024/04/25 13:51:01 by dasalaza         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:42:34 by dasalaza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	check_correct_args(int argc, char **argv)
 
 	if (argc != 3)
 	{
-		ft_printf("number of args is incorrect!");
+		ft_printf("number of args are incorrect!");
 		return (1);
 	}
 	else
@@ -40,7 +40,8 @@ int	check_correct_args(int argc, char **argv)
 
 // Que queremos hacer: Comunicarnos con el servidor mediante señales para
 // enviar un string.
-void	send_char(pid_t pid, char c) {
+void	send_char(pid_t pid, char c)
+{
 	int	i;
 	int	bit;
 
@@ -62,11 +63,9 @@ void	send_char(pid_t pid, char c) {
 // -1 = ERROR
 int	checkMessageLengthClient(char *str)
 {
-	int		length_message;
+	int	length_message;
 
-	length_message = -1;
 	length_message = ft_strlen(str);
-	//if (length_message > 0 && length_message < 2147483647)
 	if (length_message > 0)
 		return (length_message);
 	return (-1);
@@ -74,19 +73,20 @@ int	checkMessageLengthClient(char *str)
 
 char	*client(pid_t pidServer, char *strToSend)
 {
-	char	*strReturn;
-	size_t	i;
+	char	*strToSendServer;
+	int		i;
+
 	ft_printf("%ui\n", pidServer);
 	ft_printf("%s\n", strToSend);
 
-	strReturn = NULL;
+	strToSendServer = NULL;
 	i = 0;
-	while (strToSend[i])
+	while (strToSend[i] != '\0')
 	{
-		strReturn[i] = strToSend[i];
+		strToSendServer[i] = strToSend[i];
 		i++;
 	}
-	return (strReturn);
+	return (strToSendServer);
 }
 
 int	main (int argc, char **argv)
