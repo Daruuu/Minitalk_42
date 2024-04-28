@@ -6,43 +6,30 @@
 /*   By: dasalaza <dasalaza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:09:34 by dasalaza          #+#    #+#             */
-/*   Updated: 2024/04/27 23:51:05 by dasalaza         ###   ########.fr       */
+/*   Updated: 2024/04/28 16:27:14 by dasalaza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-/**
- *	check number of args in client
- *	check in argv 2 no send a PID of server*/
-
-static int	check_correct_args(int argc, char **argv)
+void	check_correct_args(char **argv)
 {
-	char	*chars_pid_server;
 	int		i;
 
-	chars_pid_server = "012456789";
-	if (argc != 3)
-	{
-		ft_printf("number of args are incorrect!\n");
-		return (-1);
-	}
 	i = 0;
-	while (argv[1][i])
+	while (argv[1][i] != '\0')
 	{
-		if (!(ft_strchr(chars_pid_server, argv[1][i])))
+		if (!ft_isdigit(argv[1][i]))
 		{
 			ft_printf("Invalid PID for server!\n");
-			return (-1);
+			exit(EXIT_FAILURE);
 		}
 		i++;
 	}
-	return (0);
 }
 
-// Que queremos hacer: Comunicarnos con el servidor mediante señales para
-// enviar un string.
-void	send_char(pid_t pid, char c)
+/*ft_printf("BITS: %i\n", i);*/
+void	send_char(pid_t pid, char c, int *count_chars)
 {
 	int	i;
 	int	bit;
@@ -51,61 +38,38 @@ void	send_char(pid_t pid, char c)
 	while (i >= 0)
 	{
 		bit = (c >> i) & 1;
-		if (bit == 0)// 30
+		if (bit == 0)
 			kill(pid, SIGUSR1);
-		else	// 31
+		else
 			kill(pid, SIGUSR2);
-		// tiempo a esperar, para asegurar que la senyal sea manejada
-		usleep(100);
+		usleep(TIME_WAITING);
 		i--;
+		count_chars++;
 	}
 }
 
-int	check_length_message(char *str)
+int	main(int argc, char **argv)
 {
-	int	length_message;
-
-	length_message = ft_strlen(str);
-	if (length_message > 0)
-		return (length_message);
-	return (-1);
-}
-
-char	*client (pid_t pidServer, char *strToSend)
-{
-	if (!strToSend)
-		ft_printf("No Message to send!\n");
-	else
-		ft_printf("%ui\n", pidServer);
-		ft_printf("%s\n", strToSend);
-
-	return (0);
-}
-
-int	main (int argc, char **argv)
-{
-	int		lengthMessage;
 	int		i;
-	char	*message;
-	pid_t	pidServer;
+	char	*message_to_send;
+	int		length_message;
+	int		*count_chars;
 
-	if (check_correct_args(argc, argv) != 0)
-		return (1);
-	lengthMessage = check_length_message(argv[2]);
-	if (lengthMessage < 0)
-	{
-		ft_printf("Invalid mmessage length!\n");
-		return (1);
-	}
-
-	// SEND STRING TO SERVER VIA SIGUSER1-2 
+	message_to_send = argv[2];
+	count_chars = 0;
 	i = 0;
-	message = argv[2];
-	pidServer = ft_atoi(argv[1]);
-	while (message[i] != '\0' && i <= lengthMessage)
+	if (argc == 3)
 	{
-		send_char(pidServer, message[i]);
-		i++;
+		length_message = ft_strlen(message_to_send);
+		check_correct_args(argv);
+		ft_printf("LENGTH MESSAGE => %d\n", length_message);
+		while (message_to_send[i] != '\0')
+		{
+			send_char((pid_t)argv[1], message_to_send[i], count_chars);
+			i++;
+		}
 	}
+	else
+		ft_printf("number of args are incorrect!\n");
 	return (0);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_server.c                                        :+:      :+:    :+:   */
+/*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dasalaza <dasalaza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:09:43 by dasalaza          #+#    #+#             */
-/*   Updated: 2024/04/25 09:56:38 by dasalaza         ###   ########.fr       */
+/*   Updated: 2024/04/28 18:28:37 by dasalaza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@ void	handle_sigusr2(int signum)
 {
 
 }
+void	get_length_message()
+
+int	binary_to_char(int **ptr)
+{
+
+	return (0);
+}
 
 void	server()
 {
@@ -37,7 +44,6 @@ void	server()
 		exit(-1);
 	}
 	ft_printf("PID of Server: %d\n", server_pid);
-
 }
 
 int	main()
