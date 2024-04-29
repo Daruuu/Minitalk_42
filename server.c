@@ -6,7 +6,7 @@
 /*   By: dasalaza <dasalaza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:09:43 by dasalaza          #+#    #+#             */
-/*   Updated: 2024/04/28 18:28:37 by dasalaza         ###   ########.fr       */
+/*   Updated: 2024/04/29 12:00:17 by dasalaza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,15 @@ void	handle_sigusr2(int signum)
 {
 
 }
+// esta funcion recoge la longitd que he pasado del cliente al servidor
+// para comparar la longitud recibida con la longitud que recibo
 void	get_length_message()
+{
 
+}
+// convertir los bits que envio del cliente hacia el servidor
+// y aqui comprobar la longitud del cliente con el servidor:x
+//
 int	binary_to_char(int **ptr)
 {
 
