@@ -6,7 +6,7 @@
 /*   By: dasalaza <dasalaza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:09:34 by dasalaza          #+#    #+#             */
-/*   Updated: 2024/04/28 16:27:14 by dasalaza         ###   ########.fr       */
+/*   Updated: 2024/04/30 10:30:42 by dasalaza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	check_correct_args(char **argv)
 	}
 }
 
-/*ft_printf("BITS: %i\n", i);*/
 void	send_char(pid_t pid, char c, int *count_chars)
 {
 	int	i;
