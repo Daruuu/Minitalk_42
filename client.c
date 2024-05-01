@@ -6,7 +6,7 @@
 /*   By: dasalaza <dasalaza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:09:34 by dasalaza          #+#    #+#             */
-/*   Updated: 2024/04/30 10:30:42 by dasalaza         ###   ########.fr       */
+/*   Updated: 2024/05/01 11:37:16 by dasalaza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	check_correct_args(char **argv)
 	}
 }
 
-void	send_char(pid_t pid, char c, int *count_chars)
+void	send_char(int pid, char c)
 {
 	int	i;
 	int	bit;
@@ -43,7 +43,6 @@ void	send_char(pid_t pid, char c, int *count_chars)
 			kill(pid, SIGUSR2);
 		usleep(TIME_WAITING);
 		i--;
-		count_chars++;
 	}
 }
 
@@ -64,9 +63,10 @@ int	main(int argc, char **argv)
 		ft_printf("LENGTH MESSAGE => %d\n", length_message);
 		while (message_to_send[i] != '\0')
 		{
-			send_char((pid_t)argv[1], message_to_send[i], count_chars);
+			send_char(ft_atoi(argv[1]), message_to_send[i]);
 			i++;
 		}
+		//ft_printf("%d\n", count_chars);
 	}
 	else
 		ft_printf("number of args are incorrect!\n");
