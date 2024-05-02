@@ -6,7 +6,7 @@
 /*   By: dasalaza <dasalaza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:09:34 by dasalaza          #+#    #+#             */
-/*   Updated: 2024/05/01 18:19:34 by dasalaza         ###   ########.fr       */
+/*   Updated: 2024/05/02 00:20:16 by dasalaza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	check_correct_args(char **argv)
 		i++;
 	}
 }
-
+// INTEGRARLO EN UN LOOP PARA ITERAR CHAR POR CHAR
 static void	send_char(int pid, char c)
 {
 	int	i;
@@ -75,7 +75,6 @@ int	main(int argc, char **argv)
 	int		pid_server;
 
 	i = 0;
-
 	if (argc == 3)
 	{
 		check_correct_args(argv);
@@ -84,6 +83,7 @@ int	main(int argc, char **argv)
 		pid_server = ft_atoi(argv[1]);
 		if (length_message > 0)
 			send_length_message_to_server(pid_server, length_message);
+
 		ft_printf("LENGTH MESSAGE => %d\n", length_message);
 		while (message_to_send[i] != '\0')
 		{
