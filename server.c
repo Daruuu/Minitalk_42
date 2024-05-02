@@ -6,14 +6,32 @@
 /*   By: dasalaza <dasalaza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:09:43 by dasalaza          #+#    #+#             */
-/*   Updated: 2024/05/02 02:05:37 by dasalaza         ###   ########.fr       */
+/*   Updated: 2024/05/02 17:07:19 by dasalaza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-char	*g_received_message = {0};
+//char	*g_received_message = {0};
 
+char	*print_message(int length, char c)
+{
+	static char	*received_message = NULL; 
+
+	if (received_message == NULL)
+		received_message = ft_strdup("");
+	if (ft_strlen(received_message) == length)
+		ft_printf("Message received: %s\n", received_message);
+	return (received_message);
+}
+
+char	*ft_strjoin_char(char *str, char c)
+{
+
+	return (str);
+}
+
+/*
 char	*print_message(int length, char c)
 {
 	char	*str;
@@ -29,7 +47,6 @@ char	*print_message(int length, char c)
 		}
 		g_received_message[0] = '\0';
 	}
-
 	str = malloc(sizeof(char *) * length);
 	if (!str)
 	{
@@ -44,6 +61,7 @@ char	*print_message(int length, char c)
 	}
 	return (0);
 }
+*/
 
 int	get_length_message(void)
 {
