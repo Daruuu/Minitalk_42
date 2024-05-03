@@ -6,7 +6,7 @@
 /*   By: dasalaza <dasalaza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:15:57 by dasalaza          #+#    #+#             */
-/*   Updated: 2024/05/03 13:33:39 by dasalaza         ###   ########.fr       */
+/*   Updated: 2024/05/03 16:10:31 by dasalaza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,5 @@ typedef struct	s_message
 # include <unistd.h>
 # include "include/printf/ft_printf.h"
 # include "include/libft/libft.h"
-
-# define TIME_WAITING 100
 
 #endif
