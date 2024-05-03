@@ -6,62 +6,41 @@
 /*   By: dasalaza <dasalaza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:09:43 by dasalaza          #+#    #+#             */
-/*   Updated: 2024/05/02 17:07:19 by dasalaza         ###   ########.fr       */
+/*   Updated: 2024/05/03 13:33:48 by dasalaza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-//char	*g_received_message = {0};
+t_message	g_message = {0};
 
-char	*print_message(int length, char c)
+void	signal_handle_message(int signum)
 {
-	static char	*received_message = NULL; 
+	static int	c;
+	static int	i;
+	int			nb;
 
-	if (received_message == NULL)
-		received_message = ft_strdup("");
-	if (ft_strlen(received_message) == length)
-		ft_printf("Message received: %s\n", received_message);
-	return (received_message);
-}
-
-char	*ft_strjoin_char(char *str, char c)
-{
-
-	return (str);
-}
-
-/*
-char	*print_message(int length, char c)
-{
-	char	*str;
-	int		i;
-
-	if (g_received_message == NULL)
+	if (signum == SIGUSR2)
+		nb = 0;
+	else
+		nb = 1;
+	c = (c << 1) + nb;
+	i++;
+	if (i == 8)
 	{
-		g_received_message = malloc(sizeof(char *) * length);
-		if (!g_received_message)
+		g_message.content[g_message.index] = c;
+		g_message.index = g_message.index + 1;
+		if (g_message.index == g_message.length)
 		{
-			ft_printf("Error malloc failed!\n");
-			exit(EXIT_FAILURE);
+			g_message.content[g_message.index] = '\0';
+			ft_printf("message: %s\n", g_message.content);
+			g_message.index = 0;
+			g_message.length = 0;
 		}
-		g_received_message[0] = '\0';
+		i = 0;
+		c = 0;
 	}
-	str = malloc(sizeof(char *) * length);
-	if (!str)
-	{
-		ft_printf("error al crear malloc!");
-		exit(EXIT_FAILURE);
-	}
-	i = 0;
-	while (str[i] != '\0')
-	{
-		// ADD NEW FUNCTION
-		i++;
-	}
-	return (0);
 }
-*/
 
 int	get_length_message(void)
 {
@@ -79,23 +58,24 @@ int	get_length_message(void)
 	return (-1);
 }
 
-void	signals_handle(int signal)
+void	signal_handle_length(int signum)
 {
 	static int	i;
-	static int	c;
 	int			nb;
 
-	if (signal == SIGUSR1)
+	if (signum == SIGUSR1)
 		nb = 0;
 	else
 		nb = 1;
-	c = (c << 1) + nb;
+	g_message.length = (g_message.length << 1) + nb;
 	i++;
-	if (i == 8)
+	if (i == 32)
 	{
-		write(1, &c, 1);
+		signal(SIGUSR1, signal_handle_message);
+		signal(SIGUSR2, signal_handle_message);
+		ft_printf("length message SERVER: %d\n", g_message.length);
+		g_message.content = malloc(sizeof(char *) * (g_message.length + 1));
 		i = 0;
-		c = 0;
 	}
 }
 
@@ -107,13 +87,9 @@ int	main(void)
 	ft_printf("Welcome to my SERVER\n");
 	ft_printf("The server is UP and running.\n");
 	ft_printf("The PID of server is: %d\n", getpid());
-	signal(SIGUSR1, signals_handle);
-	signal(SIGUSR2, signals_handle);
-	//if ()
-	total_message = get_length_message();
-	//message = print_message(total_message, );
+	signal(SIGUSR1, signal_handle_length);
+	signal(SIGUSR2, signal_handle_length);
 	while (1)
-		usleep(100);
-		/*pause();*/
+		usleep(TIME_WAITING);
 	return (0);
 }

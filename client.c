@@ -6,7 +6,7 @@
 /*   By: dasalaza <dasalaza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:09:34 by dasalaza          #+#    #+#             */
-/*   Updated: 2024/05/02 00:20:16 by dasalaza         ###   ########.fr       */
+/*   Updated: 2024/05/03 13:34:33 by dasalaza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	check_correct_args(char **argv)
 		i++;
 	}
 }
-// INTEGRARLO EN UN LOOP PARA ITERAR CHAR POR CHAR
+
 static void	send_char(int pid, char c)
 {
 	int	i;
@@ -41,13 +41,13 @@ static void	send_char(int pid, char c)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
-		usleep(100);
+		usleep(TIME_WAITING);
 		i--;
 	}
 }
 
-//SIGUSR2 = 1
-//SIGUSR1 = 0
+/*SIGUSR2 = 1
+SIGUSR1 = 0*/
 void	send_length_message_to_server(int pid_server, int num)
 {
 	int	i;
@@ -55,13 +55,13 @@ void	send_length_message_to_server(int pid_server, int num)
 	i = sizeof(int) * 8 - 1;
 	if (num > 0)
 	{
-		while (i >= 0) 
+		while (i >= 0)
 		{
 			if ((num >> i) & 1)
 				kill(pid_server, SIGUSR2);
 			else
 				kill(pid_server, SIGUSR1);
-			usleep(100);
+			usleep(TIME_WAITING);
 			i--;
 		}
 	}
@@ -83,7 +83,6 @@ int	main(int argc, char **argv)
 		pid_server = ft_atoi(argv[1]);
 		if (length_message > 0)
 			send_length_message_to_server(pid_server, length_message);
-
 		ft_printf("LENGTH MESSAGE => %d\n", length_message);
 		while (message_to_send[i] != '\0')
 		{
