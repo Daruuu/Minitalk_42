@@ -38,5 +38,7 @@ https://www.codequoi.com/envoyer-et-intercepter-un-signal-en-c/
 
 
 
+// COMO TESTEAR MINITALK CLIENT:
+./client 45203 "$(<file.txt)"
 
 
