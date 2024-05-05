@@ -1,76 +1,56 @@
-SERVER		=	ft_server.c
-CLIENT		=	ft_client.c
+# Paths
+MAKE = make --no-print-directory
+INCL_LIBFT   = include/libft/
+INCL_PRINTF  = include/libft/printf/
 
-INCL_LIBFT	=	include/libft/
-INCL_PRINTF	=	include/printf/
+# Source files
+SERVER       = server.c
+CLIENT       = client.c
 
-# ------------------LIBFT source-----------------------
+# Object files
+SERVER_OBJS  = $(SERVER:.c=.o)
+CLIENT_OBJS  = $(CLIENT:.c=.o)
+OBJS         = $(SERVER_OBJS) $(CLIENT_OBJS)
 
-LIBFT		=	make -C $(INCL_LIBFT)
-LIB_LIBFT	=	$(INCL_LIBFT)libft.a
+# Names
+SERVER_NAME  = server
+CLIENT_NAME  = client
 
-CLEAN_LIBFT	=	make fclean -C include/libft/ 
+# Compilation
+CC           = cc
+CFLAGS       = -Wall -Wextra -Werror
+PRINTF_LIB   = $(INCL_PRINTF)libftprintf.a
+LIBFT_LIB    = $(INCL_LIBFT)libft.a
 
-# ------------------PRINTF source--------------------------
+# Commands
+RM           = rm -f
 
-PRINTF		=	make -C $(INCL_PRINTF)
-LIB_PRINTF	=	$(INCL_PRINTF)libftprintf.a
+# Rules
+all: compile $(SERVER_NAME) $(CLIENT_NAME)
 
-CLEAN_PRINTF=	make fclean -C include/printf/ 
+compile:
+	@$(MAKE) -C $(INCL_LIBFT)
+	@$(MAKE) -C $(INCL_PRINTF)
 
-# ---------------sources and objects----------------------
+$(SERVER_NAME): $(SERVER_OBJS)
+	@$(CC) $(CFLAGS) $(SERVER_OBJS) $(LIBFT_LIB) $(PRINTF_LIB) -o $@
 
-SERVER_SRC	=	$(SERVER)
-CLIENT_SRC	=	$(CLIENT)
+$(CLIENT_NAME): $(CLIENT_OBJS)
+	@$(CC) $(CFLAGS) $(CLIENT_OBJS) $(LIBFT_LIB) $(PRINTF_LIB) -o $@
 
-SERVER_OBJS	=	$(SERVER_SRC:.c=.o)
-CLIENT_OBJS	=	$(CLIENT_SRC:.c=.o)
-
-OBJS		=	$(SERVER_OBJS) $(CLIENT_OBJS)
-
-# ----------------- Constants strings ---------------------
-
-CC			=	cc 
-CFLAGS		=	-Wall -Wextra -Werror
-HEADER		=	minitalk.h
-
-RM			=	rm -f
-
-SERVER_NAME	=	server
-CLIENT_NAME	=	client
-
-NAME_SERVER = 	server
-NAME_CLIENT	=	client
-
-# -------------------------RULES----------------------------
-
-all:	compile $(NAME) 
-
-$(NAME):	ft_server ft_client
-
-%.o: %.c $(HEADER) Makefile
+%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-compile: 	
-	$(PRINTF)
-	$(LIBFT)
-
-ft_server:	$(SERVER_OBJS)
-	$(CC) $(CFLAGS) $(SERVER_OBJS) $(LIB_PRINTF) -o $(SERVER_NAME)
-
-ft_client:	$(CLIENT_OBJS)
-	$(CC) $(CFLAGS) $(CLIENT_OBJS) $(LIB_PRINTF) -o $(CLIENT_NAME)
-
-clean:		
+clean:
 	$(RM) $(OBJS)
-	make clean -C include/libft/
-	make clean -C include/printf/
+	@$(MAKE) clean -C $(INCL_LIBFT)
+	@$(MAKE) clean -C $(INCL_PRINTF)
 
-fclean:	clean
-	$(RM) $(NAME_SERVER) $(NAME_CLIENT)
-	$(CLEAN_LIBFT)
-	$(CLEAN_PRINTF)
+fclean: clean
+	$(RM) $(SERVER_NAME) $(CLIENT_NAME)
+	@$(MAKE) fclean -C $(INCL_LIBFT)
+	@$(MAKE) fclean -C $(INCL_PRINTF)
 
-re:	fclean all
+re: fclean all
 
-.PHONY:	all clean fclean re start_include
+.PHONY: all compile clean fclean re

@@ -6,7 +6,7 @@
 /*   By: dasalaza <dasalaza@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:09:34 by dasalaza          #+#    #+#             */
-/*   Updated: 2024/05/03 21:06:22 by dasalaza         ###   ########.fr       */
+/*   Updated: 2024/05/05 20:25:45 by dasalaza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,13 @@ void	send_length_message_to_server(int pid_server, int num)
 	}
 }
 
+void	reset_variables(char **message, int *iterator, int *length_message)
+{
+	*message = 0;
+	*iterator = 0;
+	*length_message = 0;
+}
+
 int	main(int argc, char **argv)
 {
 	int		i;
@@ -81,12 +88,12 @@ int	main(int argc, char **argv)
 		pid_server = ft_atoi(argv[1]);
 		if (length_message > 0)
 			send_length_message_to_server(pid_server, length_message);
-		ft_printf("LENGTH MESSAGE => %d\n", length_message);
 		while (message_to_send[i] != '\0')
 		{
-			send_char(pid_server, message_to_send[i]);
-			i++;
+			send_char(pid_server, message_to_send[i++]);
 		}
+		if (i == length_message)
+			reset_variables(&message_to_send, &i, &length_message);
 	}
 	else
 		ft_printf("number of args are incorrect!\n");
